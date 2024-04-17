@@ -1,0 +1,115 @@
+{% extends 'hospital/homebase.html/'%}
+{% load static%}
+
+{% include "hospital/navbar.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: "Roboto", sans-serif;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #9E11E5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+      }
+    .form-content {
+        padding: 10%;
+        border: 2px solid #BE0505;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+    
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 20%;
+        cursor: pointer;
+        {% comment %} background: #0062cc; {% endcomment %}
+        color: #fff;
+    }
+</style>
+  <center>
+    <h1>Transactions document</h1>
+    <br></br>
+    {% if submitted%}
+
+    <h4>Transaction processed successsfully.</h4>
+    <br>
+
+    {% else%}
+    <div class="container ">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10 col-md-8 col-lg-6">
+
+      <form class="form-content w-80 rounded" action="{% url 'billing' %}" method="POST">
+        <h2 class="font-weight-bolder">Billing Form</h2>
+        {% csrf_token %}
+        <div class="row p-4">
+          <div class="col-md-6">
+            <select name="patient" id="patient" class="form-control" placeholder="Medical Record">
+                <option value="" selected disabled>Select Patient</option>
+                {% for patient in patients %}
+                    <option value="{{ patient.id }}">{{ patient.full_name}}</option>
+                {% endfor %}
+                </select>
+          </div>
+
+          <div class="col-md-6">
+            <input type="text" name="bill_number" id="bill_number" class="form-control"  placeholder="Bill number">
+          </div>
+          
+        </div>
+        
+        <div class="row p-4">
+            <div class="col-md-12">
+                <select name="payment_method" id="payment_method" class="form-control">
+                  <option value="" selected disabled>Select Mode of Payment</option>
+                  {% for mode_choice in METHOD%}
+                      <option value="{{ mode_choice.0 }}">{{ mode_choice.1 }}</option>
+                  {% endfor %}
+              </select>
+              </div>
+
+          
+        </div>
+        
+        <div class="row p-4">
+          <div class="col-md-6">
+            <input type="text" name="total_amount" id="total_amount" class="form-control"  placeholder="Total Amount">
+        </div>
+          <div class="col-md-6">
+            <input type="text" name="date" id="date" class="form-control" placeholder="Date">
+          </div>
+        </div>
+
+        <div class="col-12 p-3">
+            <button type="submit" class="btnSubmit btn-danger" id="continueButton">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+    {% endif %}
+  </center>
+
+{% endblock %}
+
+{% include "hospital/footer.html" %}

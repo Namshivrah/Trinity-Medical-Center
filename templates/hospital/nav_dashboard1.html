@@ -1,0 +1,119 @@
+{% load static %} {% block content %}
+
+  <head>
+    <title>Navbar</title>
+    <style type="text/css">
+      .bs-example {
+        margin: 0px;
+      }
+    
+      .navbar-brand {
+        font-size: 20px;
+        font-family: sans-serif;
+      }
+      .dropdown-submenu {
+        position: relative;
+      }
+      
+      .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+      }
+      
+      .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+      }
+    </style>
+
+
+  </head>
+
+<body>
+  <div class="bs-example">
+    <nav
+        class="navbar navbar-expand-md navbar-dark fixed-top"
+        style="background: #17A401"
+    >
+        <a href="">
+          <img src="{% static "images/logo.png" %}" alt="logo"
+          style="height:50px ;margin-left: 10%; "></a
+        >
+
+        <a href="/" class="navbar-brand" style="margin-left: 5%"
+          >Trinity Medical Center </a
+        >
+        <button
+          type="button"
+          class="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+      <div class="collapse navbar-collapse justify-content-between"
+        id="navbarCollapse">
+          
+         
+          <div class="navbar-nav">
+            <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
+          </div>
+          <div class="navbar-nav">
+            <div class="dropdown">
+              <button class="btn  btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Patient Department
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'register_patient' %}">Register Patient</a>
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Schedule Appointment
+                </button>
+                {% comment %} <a class="dropdown-item" href="{% url 'patient_dept_signup' %}">
+                  Schedule Appoinment
+                </a> {% endcomment %}
+                  <div class="dropdown" aria-labelledby="dropdownMenuButton">
+                    <a href="{% url 'request_appointment' %}">Request Appoinment</a>
+                    <a href="{% url 'confirmed_appointments' %}">Confirmed Appointment</a>
+                  </div>
+                <a class="dropdown-item" href="#">Messages</a>
+              </div>
+            </div>
+{% comment %}             
+            <div class="dropdown">
+              <button class="btn btn-success  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Records Department
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Edit health Records</a>
+                <a class="dropdown-item" href="#">View health Records</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-success  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Financial Department
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Financial Transactions</a>
+                <a class="dropdown-item" href="#">Insurance Claims</a>
+              </div>
+            </div> {% endcomment %}
+           
+
+          <div class="navbar-nav">
+            <a href="/aboutus" class="nav-item nav-link">About Us</a>
+            <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+          </div> 
+
+        
+      </div> 
+    </nav>
+  </div>
+
+
+</body>
+{% endblock content %}
+

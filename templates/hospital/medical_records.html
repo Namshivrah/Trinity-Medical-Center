@@ -1,0 +1,147 @@
+{% extends 'hospital/homebase.html/'%}
+{% load static%}
+
+{% include "hospital/navbar.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: "Roboto", sans-serif;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #9E11E5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+      }
+    .form-content {
+        padding: 10%;
+        border: 2px solid #BE0505;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+    
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 20%;
+        cursor: pointer;
+        {% comment %} background: #0062cc; {% endcomment %}
+        color: #fff;
+    }
+</style>
+  <center>
+    <h1>Medical Records Form</h1>
+    <br></br>
+    {% if submitted%}
+
+    <h4>Records stored successsfully.</h4>
+    <br>
+
+    {% else%}
+    <div class="container ">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10 col-md-8 col-lg-6">
+
+      <form class="form-content w-80 rounded" action="{% url 'medical_records' %}" method="POST">
+        <h2 class="font-weight-bolder">Medical Records Form</h2>
+        {% csrf_token %}
+        <div class="row p-4">
+          <div class="col-md-6">
+            <select name="Patient" id="Patient" class="form-control" placeholder="Patient">
+                <option value="" selected disabled>Select Patient</option>
+                {% for patient in patients %}
+                    <option value="{{ patient.id }}">{{ patient.full_name }}</option>
+                {% endfor %}
+                </select>
+          </div>
+    
+          <div class="col-md-6">
+            <select name="Doctor" id="Doctor" class="form-control" placeholder="Doctor">
+                <option value="" selected disabled>Select Doctor</option>
+                {% for doctor in doctors %}
+                    <option value="{{ doctor.id }}">{{ doctor.full_name }}</option>
+                {% endfor %}
+                </select>
+          </div>
+        </div>
+        
+        <div class="row p-4">
+          <div class="col-md-6">
+            <input type="text" name="medical_history" id="medical_history" class="form-control"  placeholder="Medical History">
+          </div>
+
+          <div class="col-md-6">
+              <input type="text" name="notes" id="notes" class="form-control"  placeholder="Notes">
+          </div>
+        </div>
+        
+        <div class="row p-4">
+          <div class="col-md-6">
+            <input type="text" name="symptoms" id="symptoms" class="form-control" placeholder="TSymptoms">
+          </div>
+
+          <div class="col-md-6">
+            <input type="text" name="diagnosis" id="diagnosis" class="form-control" placeholder="Diagnosis">
+          </div>
+
+        </div>
+
+  
+        <div class="row p-4">
+            <div class="col-md-4">
+              <input type="text" name="prescription" id="prescription" class="form-control" placeholder="Prescription">
+            </div>
+  
+            <div class="col-md-4">
+              <input type="text" name="current_medication" id="current_medication" class="form-control" placeholder=" Medication">
+            </div>
+            
+            <div class="col-md-4">
+                <input type="text" name="test_results" id="test_results" class="form-control" placeholder="Test Results">
+            </div>
+        </div>
+
+        <div class="row p-4">
+            <div class="col-md-4">
+              <input type="text" name="date" id="date" class="form-control" placeholder="Date">
+            </div>
+  
+            <div class="col-md-4">
+              <input type="text" name="updated_by" id="updated_by" class="form-control" placeholder="Updated by:">
+            </div>
+            
+            <div class="col-md-4">
+                <input type="text" name="updated" id="updated" class="form-control" placeholder="Updated on:">
+            </div>
+        </div>
+
+        <div class="col-12 p-3">
+            <button type="submit" class="btnSubmit btn-danger" id="continueButton">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+    {% endif %}
+  </center>
+
+{% endblock %}
+
+{% include "hospital/footer.html" %}

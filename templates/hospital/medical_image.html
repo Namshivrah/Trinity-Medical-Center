@@ -1,0 +1,108 @@
+{% extends 'hospital/homebase.html/'%}
+{% load static%}
+
+{% include "hospital/navbar.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: "Roboto", sans-serif;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #9E11E5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+      }
+    .form-content {
+        padding: 10%;
+        border: 2px solid #BE0505;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+    
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 20%;
+        cursor: pointer;
+        {% comment %} background: #0062cc; {% endcomment %}
+        color: #fff;
+    }
+</style>
+  <center>
+    <h1>Medical images document</h1>
+    <br></br>
+    {% if submitted%}
+
+    <h4>Images stored successsfully.</h4>
+    <br>
+
+    {% else%}
+    <div class="container ">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10 col-md-8 col-lg-6">
+
+      <form class="form-content w-80 rounded" action="{% url 'medical_image' %}" method="POST">
+        <h2 class="font-weight-bolder">Images Results Form</h2>
+        {% csrf_token %}
+        <div class="row p-4">
+          <div class="col-md-6">
+            <select name="health_record" id="health_record" class="form-control" placeholder="Medical Record">
+                <option value="" selected disabled>Select Medical Record</option>
+                {% for medical_record in medical_records %}
+                    <option value="{{ medical_record.id }}">{{ medical_record.patient.full_name}}, {{medical_record.date}}</option>
+                {% endfor %}
+                </select>
+          </div>
+    
+          <div class="col-md-6">
+                {{form.image}}
+          </div>
+        </div>
+        
+        <div class="row p-4">
+          <div class="col-md-12">
+            <input type="text" name="description" id="description" class="form-control"  placeholder="Description">
+          </div>
+        </div>
+        
+        <div class="row p-4">
+            <div class="col-md-6">
+                <input type="text" name="updated_by" id="updated_by" class="form-control"  placeholder="Updated by: ">
+            </div>
+          <div class="col-md-6">
+            <input type="text" name="updated_on" id="updated_on" class="form-control" placeholder="Updated on:">
+          </div>
+
+        </div>
+
+        <div class="col-12 p-3">
+            <button type="submit" class="btnSubmit btn-danger" id="continueButton">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+    {% endif %}
+  </center>
+
+{% endblock %}
+
+{% include "hospital/footer.html" %}

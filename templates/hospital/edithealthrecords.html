@@ -1,0 +1,90 @@
+{% extends 'hospital/homebase.html/'%}
+{% load static%}
+
+{% include "hospital/navbar.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: "Roboto", sans-serif;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #9E11E5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+      }
+
+    
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 20%;
+        cursor: pointer;
+        {% comment %} background: #0062cc; {% endcomment %}
+        color: #fff;
+    }
+</style>
+  <center>
+    <h1>Patient Health Records</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 p-5">
+        <div class="col mb-4 h">
+          <div class="card">
+            <img src="{% static "images/medic-rec.jpg" %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold">Medical Records</h5>
+              <p class="card-text">Get a chance to store your patient records forever.</p>
+              <a href="{% url 'medical_records' %}" class="btn btn-primary">Medical Records</a>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <img src="{% static "images/test_results.jpg" %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold">Test Results</h5>
+              <p class="card-text">Keep all their test results in a place.</p>
+              <a href="{% url 'test_results' %}" class="btn btn-primary">Test Results </a>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <img src="{% static "images/medical-imaging.jpg" %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold">Medical Images</h5>
+              <p class="card-text">Click the link to see it all.</p>
+              <a href="{% url 'medical_image' %}" class="btn btn-primary">Medical Image </a>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <img src="{% static "images/treat_plan.png" %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title font-weight-bold">Treatment Plan</h5>
+              <p class="card-text">Make a plan  to treat them successsfully.</p>
+              <a href="{% url 'treatment_plan'%}" class="btn btn-primary">Treatment Plan </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  
+  </center>
+
+{% endblock %}
+
+{% include "hospital/footer.html" %}

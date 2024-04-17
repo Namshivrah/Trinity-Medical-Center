@@ -1,0 +1,66 @@
+{% extends 'hospital/homebase.html' %} {% load static %}
+
+
+{% include "hospital/navbar.html" %}
+
+{% block content %}
+
+<style>
+    body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: "Roboto", sans-serif;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #9E11E5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+    }
+
+    .form-content {
+        padding: 10%;
+        border: 2px solid #BE0505;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        width: 20%;
+        cursor: pointer;
+        /* background: #0062cc; */
+        color: #fff;
+    }
+    </style>
+<center>
+<h1>Appointments</h1>
+
+{% for appointment in appointments %}
+    <div>
+        <h2>{{ appointment.request.patient.full_name }}</h2>
+        <p>Date: {{ appointment.date }}</p>
+        <p>Start Time: {{ appointment.start_time }}</p>
+        <p>End Time: {{ appointment.end_time }}</p>
+        <p>Status: {{ appointment.status }}</p>
+    </div>
+    {% empty %}
+        <p class="p-20">No appointments.</p>
+    {% endfor %}
+</center>
+
+    {% endblock %}
+
+    {% include "hospital/footer.html" %}

@@ -1,0 +1,127 @@
+{% extends 'hospital/homebase.html/'%} {% load static %} {% block content %}
+
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Smart health Application</title>
+    <style type="text/css">
+      body {
+        color: #aa082e;
+        background-color: #b6bde7;
+        font-family: "Roboto", sans-serif;
+      }
+
+      a:link {
+        text-decoration: none;
+      }
+
+      .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+      }
+
+      .form-content {
+        padding: 10%;
+        border: 2px solid #023706;
+        margin-bottom: 2%;
+      }
+
+      .form-control {
+        border-radius: 1.5rem;
+      }
+
+      .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 1%;
+        width: 20%;
+        cursor: pointer;
+        background: #0062cc;
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% include "hospital/navbar.html" %}
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!--- signup page for patient by admin(sumit)-->
+  <div class="container ">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-10 col-md-8 col-lg-6">
+
+        {% comment %} The Form {% endcomment %}
+        <form  method="post" action="{% url 'patient_dept_create' %}" class ="form-content w-79">
+          {% csrf_token %}
+          <h2 class="font-weight-bolder">SignUP To Create Account</h2>
+          <div class="form-group">
+            <label for="first_name" class="font-weight-bold">First Name</label>
+            <input type="text" name="first_name" class="form-control" id="first_name" aria-describedby="emailHelp" placeholder="Enter first name">
+          </div>
+
+          <div class="form-group">
+            <label for="last_name" class="font-weight-bold">Last Name</label>
+            <input type="text" name="last_name" class="form-control" id="last_name" aria-describedby="emailHelp" placeholder="Enter last name">
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="font-weight-bold">User Name</label>
+            <input type="text" name="username" class="form-control" id="user_name" aria-describedby="emailHelp" placeholder="Enter username">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="font-weight-bold">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+         </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="font-weight-bold">Password</label>
+            <input type="password" name="password1" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="font-weight-bold">Confirm Password</label>
+            <input type="password" name="password2" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="font-weight-bold">Department</label>
+            <select name="department" id="department" class="form-control">
+              <option value="" selected disabled>Select Department</option>
+              {% for department_choice in DEPARTMENT_CHOICES  %}
+                  <option value="{{ department_choice.0 }}">{{ department_choice.1 }}</option>
+              {% endfor %}
+          </select>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary " >SignUp</button>
+
+          <p>Already have an Account<a href="{% url 'patient_dept_signup' %}"> LogIn here </a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+    {% include "hospital/footer.html" %}
+  </body>
+</html> 
+{% endblock content %}
+
